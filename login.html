@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCL Academy Login</title>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #357ae8;
+        }
+    </style>
+</head>
+<body>
+    <h1>SCL Academy Login</h1>
+    <button id="googleSignInButton">Sign in with Google</button>
+
+    <script>
+        // Firebase Configuration (Already Replaced)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJ37I3qul8l75_o1xtqO8Gh_B0Mw_-Ht4",
+            authDomain: "scl-academy-login.firebaseapp.com",
+            projectId: "scl-academy-login",
+            storageBucket: "scl-academy-login.appspot.com", <!-- Corrected from "firebasestorage.app" -->
+            messagingSenderId: "519363450212",
+            appId: "1:519363450212:web:82948689ea93542c139671",
+            measurementId: "G-S7SP30DCQ1"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+
+        // Google Sign-In
+        const provider = new firebase.auth.GoogleAuthProvider();
+        document.getElementById("googleSignInButton").addEventListener("click", () => {
+            firebase.auth().signInWithPopup(provider)
+                .then((result) => {
+                    const user = result.user;
+                    alert(`Welcome, ${user.displayName}!`);
+                    // Redirect to a restricted page or dashboard
+                    window.location.href = "https://your-restricted-page-url.com";
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert("Login failed. Please try again.");
+                });
+        });
+    </script>
+</body>
+</html>
